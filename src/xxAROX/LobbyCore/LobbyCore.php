@@ -110,12 +110,6 @@ class LobbyCore extends PluginBase implements Listener{
 							Server::getInstance()->broadcastMessage("§l§d» §e{$player->getName()} §7is playing on §9Slot-{$id}");
 						};
 					}
-					if ($player->hasPermission("xxarox.buildserver")) {
-						$arr[$buttons[] = "§2Build-Server"] = function (Player $player, string $id) use ($data): void{
-							$player->transfer($data[0], (int) 2);
-							Server::getInstance()->broadcastMessage("§l§d» §e{$player->getName()} §7is playing on §2Build-Server");
-						};
-					}
 					$player->sendForm(new MenuForm(
 						"Select slot",
 						"Select to load slot.",
@@ -174,10 +168,10 @@ class LobbyCore extends PluginBase implements Listener{
 	}
 	public function f12(PlayerMoveEvent $event): void{
 		$radius = 12;
-		if ($event->getPlayer()->distance($this->getServer()->getDefaultLevel()->getSafeSpawn()) > $radius) {
+		if ($event->getPlayer()->distanceSquared($this->getServer()->getDefaultLevel()->getSafeSpawn()) > $radius) {
 			$event->getPlayer()->teleport($event->getFrom());
 			$event->getPlayer()->sendMessage("§c§l» §r§7You cannot leave the spawn area.");
-			if ($event->getPlayer()->distance($this->getServer()->getDefaultLevel()->getSafeSpawn()) > $radius +1) {
+			if ($event->getPlayer()->distanceSquared($this->getServer()->getDefaultLevel()->getSafeSpawn()) > $radius *2) {
 				$event->getPlayer()->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
 			}
 		}

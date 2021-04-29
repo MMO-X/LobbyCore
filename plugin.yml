@@ -1,0 +1,12 @@
+name: "LobbyCore"
+author: "xxAROX"
+website: "https://github.com/xxAROX/"
+version: "1.0"
+description: "LobbyCore plugin by xxAROX."
+
+api: [ "3" ]
+main: xxAROX\LobbyCore\LobbyCore
+
+permissions:
+  "xxarox.testServer":
+    description: "xxarox.testServer"
