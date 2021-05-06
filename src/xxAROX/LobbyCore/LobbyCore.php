@@ -18,6 +18,7 @@ use pocketmine\event\player\PlayerExhaustEvent;
 use pocketmine\event\player\PlayerItemHeldEvent;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
+use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\Item;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
@@ -38,6 +39,7 @@ class LobbyCore extends PluginBase implements Listener{
 	public bool $onlyForTesters = true;
 	protected Item $item;
 	public function onEnable(){
+		PlayerDatabase::init();
 		$this->onlyForTesters = (new Config($this->getDataFolder() . "config.yml", Config::YAML, ["onlyForTesters" => false]))->get("onlyForTesters", false);
 		$this->item = new class extends Item{
 			/**
@@ -175,5 +177,13 @@ class LobbyCore extends PluginBase implements Listener{
 				$event->getPlayer()->teleport($this->getServer()->getDefaultLevel()->getSafeSpawn());
 			}
 		}
+	}
+
+	public function join(PlayerJoinEvent $event): void{
+		PlayerDatabase::loadPlayer($event->getPlayer());
+	}
+
+	public function quit(PlayerQuitEvent $event): void{
+		PlayerDatabase::savePlayer($event->getPlayer());
 	}
 }
