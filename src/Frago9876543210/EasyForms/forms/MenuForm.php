@@ -4,6 +4,7 @@ namespace Frago9876543210\EasyForms\forms;
 use Closure;
 use Frago9876543210\EasyForms\elements\Button;
 use pocketmine\{form\FormValidationException, Player, utils\Utils};
+use Frago9876543210\EasyForms\elements\FunctionalButton;
 
 use function array_merge;
 use function Composer\Autoload\includeFile;
@@ -111,6 +112,10 @@ class MenuForm extends Form{
 			if ($this->onSubmit !== null) {
 				$button = $this->buttons[$data];
 				$button->setValue($data);
+
+				if ($button instanceof FunctionalButton) {
+					$button->onClick($player);
+				}
 				($this->onSubmit)($player, $button);
 			}
 		} else {

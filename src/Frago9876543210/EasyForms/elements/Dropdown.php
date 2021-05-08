@@ -1,10 +1,8 @@
 <?php
-
 declare(strict_types=1);
-
 namespace Frago9876543210\EasyForms\elements;
-
 use pocketmine\form\FormValidationException;
+
 
 class Dropdown extends Element{
 	/** @var string[] */
@@ -13,9 +11,9 @@ class Dropdown extends Element{
 	protected $default;
 
 	/**
-	 * @param string   $text
+	 * @param string $text
 	 * @param string[] $options
-	 * @param int      $default
+	 * @param int $default
 	 */
 	public function __construct(string $text, array $options, int $default = 0){
 		parent::__construct($text);
@@ -26,44 +24,44 @@ class Dropdown extends Element{
 	/**
 	 * @return array
 	 */
-	public function getOptions() : array{
+	public function getOptions(): array{
 		return $this->options;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getSelectedOption() : string{
+	public function getSelectedOption(): string{
 		return $this->options[$this->value];
 	}
 
 	/**
 	 * @return int
 	 */
-	public function getDefault() : int{
+	public function getDefault(): int{
 		return $this->default;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getType() : string{
+	public function getType(): string{
 		return "dropdown";
 	}
 
 	/**
 	 * @return array
 	 */
-	public function serializeElementData() : array{
+	public function serializeElementData(): array{
 		return [
 			"options" => $this->options,
-			"default" => $this->default
+			"default" => $this->default,
 		];
 	}
 
-	public function validate($value) : void{
+	public function validate($value): void{
 		parent::validate($value);
-		if(!isset($this->options[$value])){
+		if (!isset($this->options[$value])) {
 			throw new FormValidationException("Option with index $value does not exist in dropdown");
 		}
 	}

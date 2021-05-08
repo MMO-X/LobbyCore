@@ -1,11 +1,10 @@
 <?php
-
 declare(strict_types=1);
-
 namespace Frago9876543210\EasyForms\elements;
-
 use pocketmine\form\FormValidationException;
+
 use function is_bool;
+
 
 class Toggle extends Element{
 	/** @var bool */
@@ -19,45 +18,45 @@ class Toggle extends Element{
 	/**
 	 * @return bool
 	 */
-	public function getValue() : bool{
+	public function getValue(): bool{
 		return parent::getValue();
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function hasChanged() : bool{
+	public function hasChanged(): bool{
 		return $this->default !== $this->value;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function getDefault() : bool{
+	public function getDefault(): bool{
 		return $this->default;
 	}
 
 	/**
 	 * @return string
 	 */
-	public function getType() : string{
+	public function getType(): string{
 		return "toggle";
 	}
 
 	/**
 	 * @return array
 	 */
-	public function serializeElementData() : array{
+	public function serializeElementData(): array{
 		return [
-			"default" => $this->default
+			"default" => $this->default,
 		];
 	}
 
 	/**
 	 * @param $value
 	 */
-	public function validate($value) : void{
-		if(!is_bool($value)){
+	public function validate($value): void{
+		if (!is_bool($value)) {
 			throw new FormValidationException("Expected bool, got " . gettype($value));
 		}
 	}

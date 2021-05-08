@@ -1,12 +1,11 @@
 <?php
-
 declare(strict_types=1);
-
 namespace Frago9876543210\EasyForms\elements;
-
 use JsonSerializable;
 use pocketmine\form\FormValidationException;
+
 use function is_int;
+
 
 abstract class Element implements JsonSerializable{
 	/** @var string */
@@ -38,9 +37,9 @@ abstract class Element implements JsonSerializable{
 	/**
 	 * @return array
 	 */
-	final public function jsonSerialize() : array{
+	final public function jsonSerialize(): array{
 		$array = ["text" => $this->getText()];
-		if($this->getType() !== null){
+		if ($this->getType() !== null) {
 			$array["type"] = $this->getType();
 		}
 		return $array + $this->serializeElementData();
@@ -49,25 +48,25 @@ abstract class Element implements JsonSerializable{
 	/**
 	 * @return string
 	 */
-	public function getText() : string{
+	public function getText(): string{
 		return $this->text;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	abstract public function getType() : ?string;
+	abstract public function getType(): ?string;
 
 	/**
 	 * @return array
 	 */
-	abstract public function serializeElementData() : array;
+	abstract public function serializeElementData(): array;
 
 	/**
 	 * @param mixed $value
 	 */
-	public function validate($value) : void{
-		if(!is_int($value)){
+	public function validate($value): void{
+		if (!is_int($value)) {
 			throw new FormValidationException("Expected int, got " . gettype($value));
 		}
 	}

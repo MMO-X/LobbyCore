@@ -1,9 +1,6 @@
 <?php
-
 declare(strict_types=1);
-
 namespace Frago9876543210\EasyForms\elements;
-
 class Button extends Element{
 	/** @var Image|null */
 	protected $image;
@@ -11,7 +8,7 @@ class Button extends Element{
 	protected $type;
 
 	/**
-	 * @param string     $text
+	 * @param string $text
 	 * @param Image|null $image
 	 */
 	public function __construct(string $text, ?Image $image = null){
@@ -24,9 +21,9 @@ class Button extends Element{
 	 *
 	 * @return Button[]
 	 */
-	public static function createFromList(string ...$texts) : array{
+	public static function createFromList(string ...$texts): array{
 		$buttons = [];
-		foreach($texts as $text){
+		foreach ($texts as $text) {
 			$buttons[] = new self($text);
 		}
 		return $buttons;
@@ -35,23 +32,23 @@ class Button extends Element{
 	/**
 	 * @return string|null
 	 */
-	public function getType() : ?string{
+	public function getType(): ?string{
 		return null;
 	}
 
 	/**
 	 * @return bool
 	 */
-	public function hasImage() : bool{
+	public function hasImage(): bool{
 		return $this->image !== null;
 	}
 
 	/**
 	 * @return array
 	 */
-	public function serializeElementData() : array{
+	public function serializeElementData(): array{
 		$data = ["text" => $this->text];
-		if($this->hasImage()){
+		if ($this->hasImage()) {
 			$data["image"] = $this->image;
 		}
 		return $data;
