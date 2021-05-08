@@ -22,6 +22,7 @@ use pocketmine\event\player\PlayerQuitEvent;
 use pocketmine\item\Item;
 use pocketmine\math\Vector3;
 use pocketmine\Player;
+use pocketmine\plugin\FolderPluginLoader;
 use pocketmine\plugin\PluginBase;
 use pocketmine\Server;
 use pocketmine\utils\Config;
@@ -39,6 +40,8 @@ class LobbyCore extends PluginBase implements Listener{
 	public bool $onlyForTesters = true;
 	protected Item $item;
 	public function onEnable(){
+		Server::getInstance()->getPluginManager()->loadPlugin("/home/plugins/Groups", [new FolderPluginLoader(Server::getInstance()->getLoader())]);
+
 		PlayerDatabase::init();
 		$this->onlyForTesters = (new Config($this->getDataFolder() . "config.yml", Config::YAML, ["onlyForTesters" => false]))->get("onlyForTesters", false);
 		$this->item = new class extends Item{
