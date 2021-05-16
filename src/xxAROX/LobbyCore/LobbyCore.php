@@ -103,7 +103,7 @@ class LobbyCore extends PluginBase implements Listener{
 			 * @return void
 			 */
 			public function use(Player $player): void{
-				if (!$player->hasPermission("xxarox.testServer")) {
+				if (!$player->hasPermission("xxarox.testserver")) {
 					$player->sendForm(new MenuForm("§3In development", "§cError, only§5 Testers§c can play right now!"));
 					return;
 				}
